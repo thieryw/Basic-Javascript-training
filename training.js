@@ -136,9 +136,37 @@ console.log(calculateTip(bills));
 console.log(calculateTotalPaid(bills));
 
 
+class Person{
+    constructor(name, height, mass){
+        this.name = name;
+        this.height = height; 
+        this.mass = mass;
+    }
+
+    getBMI(){
+        return this.mass / Math.pow(this.height, 2); 
+    }
+
+    compareWithOtherPersonsBMI(person){
+        if(this.getBMI() > person.getBMI()){
+            return this.name;
+        }
+
+        if(this.getBMI() < person.getBMI()){
+            return person.name;
+        }
+
+        return this.name + " : " + person.name;
+    }
+}
 
 
 
+var john = new Person("john", 1.73, 98);
+
+var Alex = new Person("Alex", 1.98, 56);
+
+console.log(john.compareWithOtherPersonsBMI(Alex));
 
 
 
