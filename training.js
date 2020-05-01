@@ -128,12 +128,29 @@ function calculateTotalPaid(bills){
     return totals;
 
 }
+
+function calculateAverageTip(tips){
+
+    if(!Array.isArray(tips)) return tips;
+    
+    var average = 0;
+
+    tips.forEach(tip => {
+        average += tip;
+    });
+
+    return average / tips.length;
+
+
+}
     
 
 
 console.log(calculateTip(bills));
 
 console.log(calculateTotalPaid(bills));
+
+console.log(calculateAverageTip(calculateTip(bills)));
 
 
 class Person{
@@ -149,24 +166,50 @@ class Person{
 
     compareWithOtherPersonsBMI(person){
         if(this.getBMI() > person.getBMI()){
-            return this.name;
+            return this;
         }
 
         if(this.getBMI() < person.getBMI()){
-            return person.name;
+            return person;
         }
 
-        return this.name + " : " + person.name;
+        return [this, person];
     }
 }
 
+function printPersonWithHighestBMI(person1, person2){
+
+    var personWithHighestBMI = person1.compareWithOtherPersonsBMI(person2);
+
+    if(Array.isArray(personWithHighestBMI)){
+
+        personWithHighestBMI.forEach(person => {
+            console.log(person.name + " : " + person.getBMI());
+        });
+
+        return;
+    } 
+
+    console.log(personWithHighestBMI.name + " : " + personWithHighestBMI.getBMI());
+   
+}
+
+var john = new Person("John", 1.73, 99);
+
+var alex = new Person("Alex", 1.73, 98);
 
 
-var john = new Person("john", 1.73, 98);
 
-var Alex = new Person("Alex", 1.98, 56);
+printPersonWithHighestBMI(john, alex);
 
-console.log(john.compareWithOtherPersonsBMI(Alex));
+    
+
+    
+
+
+
+
+
 
 
 
