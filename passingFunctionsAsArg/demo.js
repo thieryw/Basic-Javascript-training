@@ -32,6 +32,9 @@ function maxHeartRate(yearOfBirth){
 
 }
 
+
+// CLOSURES EXERCISE
+
 function yearsUntilRetirment(ageOfRetirment){
     return (age) =>{
         return ageOfRetirment - age;
@@ -111,7 +114,11 @@ function interviewQuestion(job){
 }
 
 let designerQuestion = interviewQuestion(professions[0]);
+let teacherQuestion = interviewQuestion(professions[1]);
 
 designerQuestion("William");
+teacherQuestion("Horace");
+
+
 
 
