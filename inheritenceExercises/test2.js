@@ -54,6 +54,8 @@ Staff.prototype.changeSalary = function changeSalary(newSalary){
     this.salary = newSalary;
 }
 
+
+
 function Doctor(name, age, isInsured, salary, speciality){
     Staff.call(this);
     this.name = name;
