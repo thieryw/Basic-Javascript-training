@@ -42,28 +42,16 @@ var team4 = new Team("E team", [116, 94, 123, 444, 543]);
 var team5 = new Team("F team", 2000);
 
 function getTeamWithHighestScore(teams){
-    var average = 0;
-    var teamAverage;
+    
+    const average = teams
+        .map(team => team.getAverageScore())
+        .reduce((prev,curr)=> prev+curr, 0) / teams.length
+        ;
 
-    var teamsWithHighestScore;
-
-    teams.forEach(team => {
-        teamAverage = team.getAverageScore();
-
-        if(average === teamAverage){
-            teamsWithHighestScore.push(team.getTeamName());
-        }
-
-        if(average < teamAverage){
-            teamsWithHighestScore = [team.getTeamName()];
-            average = teamAverage;
-        }
-
-        
-    });
-
-    return teamsWithHighestScore;
-
+    return teams
+        .filter(team => team.getAverageScore() >= average)
+        .map(team=> team.getTeamName())
+        ;
 
 }
 
@@ -201,17 +189,3 @@ var alex = new Person("Alex", 1.73, 98);
 
 
 printPersonWithHighestBMI(john, alex);
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
