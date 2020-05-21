@@ -29,7 +29,7 @@ class Team{
 
 
 
-var team = new Team("A team", [2000, 2000, 2000]);
+var team = new Team("A team", [2000, 200, 2000]);
 
 var team1 = new Team("B team", [116, 94, 123]);
 
@@ -42,8 +42,35 @@ var team4 = new Team("E team", [116, 94, 123, 444, 543]);
 var team5 = new Team("F team", 2000);
 
 function getTeamWithHighestScore(teams){
+
+    let averageScores = [];
+    let average = 0;
+    let results = [];
+    let teamIndex = 0;
+
+    teams.forEach(team => {
+        averageScores.push(team.getAverageScore());
+    });
+
+    averageScores.forEach(averageScore => {
+
+        if(averageScore === average){
+            results.push(teams[teamIndex].getTeamName());
+        }
+
+        if(averageScore > average){
+            results = [teams[teamIndex].getTeamName()];
+            average = averageScore;
+        }
+
+        teamIndex++;
+
+        
+    });
+
+    return results;
     
-    const average = teams
+/*    const average = teams
         .map(team => team.getAverageScore())
         .reduce((prev,curr)=> prev+curr, 0) / teams.length
         ;
@@ -51,7 +78,7 @@ function getTeamWithHighestScore(teams){
     return teams
         .filter(team => team.getAverageScore() >= average)
         .map(team=> team.getTeamName())
-        ;
+        ;*/
 
 }
 

@@ -1,6 +1,6 @@
 let isQuizrunning = true;
 
-function Quiz(...questionsAndAnswers){
+function Quiz(questionsAndAnswers){
     this.questionsAndAnswers = questionsAndAnswers;
 }
 
@@ -10,42 +10,64 @@ Quiz.prototype.selectRandomQuestion = function selectRandomQuestion(){
     return this.questionsAndAnswers[randomQuestionNumber];
 }
 
+Quiz.prototype.popQuestionFromQuiz = function popQuestionFromQuiz(question){
+
+    let result = [];
+
+    this.questionsAndAnswers.forEach(quizQuestion => {
+        if(question != quizQuestion){
+            result.push(quizQuestion);
+        }
+        
+    });
+
+
+    return new Quiz(result);
+
+}
+
+
 
 function askQuestion(quiz){
 
-    if(!isQuizrunning){
+
+    if(quiz.questionsAndAnswers.length === 0){
         return;
     }
 
     const question = quiz.selectRandomQuestion();
 
-    const userAnswer = prompt(question[0],"");
+    const userAnswer = prompt(question[0],"").toLowerCase();
 
-    if(userAnswer === question[1]){
-        console.log("well done! you got the right answer!");
-        return;
-    }
 
     if(userAnswer === "exit"){
-        isQuizrunning = false;
+
         return;
     }
-
-    console.log("Wrong Answer!");
-
-}
+    
 
 
-let quiz = new Quiz(["What is the capital of Senegal ?", "dakar"], 
-["What is the queen of englands first name ?", "Elisabeth"], ["Ho is the president of USA?", "Donald Trump"]);
+    RESULTS: {
+        if(userAnswer === question[1]){
+            console.log("well done! you got the right answer!");
+            score++;
+            break RESULTS;
+        }
 
-function runQuiz(quiz){
-    while(isQuizrunning){
-        askQuestion(quiz);
+        console.log("Wrong Answer!");
     }
+
+    return askQuestion(quiz.popQuestionFromQuiz(question));
+
 }
 
-runQuiz(quiz);
+
+
+
+
+askQuestion(new Quiz([["What is the capital of Senegal ?", "dakar"], 
+["What is the queen of englands first name ?", "elisabeth"], ["Ho is the president of USA?", "donald trump"]]));
+
 
 
 
